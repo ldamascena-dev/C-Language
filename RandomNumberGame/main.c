@@ -13,11 +13,16 @@ int main() {
   for (int i = 1; i <= ATTEMPT_NUMBER; i++) {
     printf("Attempt %d of %d\n", i, ATTEMPT_NUMBER);  
     printf("What's the number? ");
-    scanf("%d", & userAttempt);
+    scanf("%d", &userAttempt);
+
+    if(userAttempt < 0){
+      printf("Do not use negative numbers!\n");
+      i--;
+      continue;
+    }
 
     int IsCorrect = (userAttempt == secretNumber);
     int isBiggerNumber = (userAttempt > secretNumber);
-    int isLessNumber = (userAttempt < secretNumber);
 
     if (IsCorrect) {
       printf("Congratulations, you got it right!\n");
