@@ -1,23 +1,25 @@
 #include <stdio.h>
 
-#define ATTEMPT_NUMBER 3
-
 int main() {
   printf("************************************* \n");
   printf("* Welcome to the random number game * \n");
   printf("************************************* \n");
  
+  int i = 0;
   int secretNumber = 42;
   int userAttempt;
+  
 
-  for (int i = 1; i <= ATTEMPT_NUMBER; i++) {
-    printf("Attempt %d of %d\n", i, ATTEMPT_NUMBER);  
+  while (1) {
+    
+    i++;
+    
+    printf("Attempt %d\n", i);  
     printf("What's the number? ");
     scanf("%d", &userAttempt);
 
     if(userAttempt < 0){
       printf("Do not use negative numbers!\n");
-      i--;
       continue;
     }
 
@@ -34,7 +36,7 @@ int main() {
     }
   }
     
-  printf("End!\n");
+  printf("End! Total: %d attempt(s).\n", i);
 
   return 0;
 }
