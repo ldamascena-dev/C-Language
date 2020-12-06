@@ -1,4 +1,7 @@
+#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int main() {
   printf("************************************* \n");
@@ -6,10 +9,12 @@ int main() {
   printf("************************************* \n");
  
   int i = 0;
-  int secretNumber = 42;
-  int userAttempt;
+  double lostScore = 0;
+  double score = 1000;
+  srand(time(0));
+  int secretNumber = rand() % 100;
+  int userAttempt = 0;
   
-
   while (1) {
     
     i++;
@@ -34,9 +39,13 @@ int main() {
     } else {
         printf("The number entered is less than the secret number.\n");
     }
+
+    lostScore = (userAttempt - secretNumber) / (double) 2;
+    score -= fabs(lostScore);
   }
     
   printf("End! Total: %d attempt(s).\n", i);
+  printf("Total Score: %.1f\n", score);
 
   return 0;
 }
