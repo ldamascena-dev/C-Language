@@ -1,50 +1,65 @@
 #include <stdio.h>
 #include <string.h>
 
-int main()
-{
-    char letter;
-    char kicks[26];
-    char secretWord[20];
-    sprintf(secretWord, "MELANCIA");
+char kicks[26];
+char secretWord[20];
+short attempts = 0;
 
-    short attempts = 0;
-    short isCorrect = 0;
-    short isFoundWord = 0;
-    short isHanged = 0;
+void opening() {
+  printf(" ****************\n");
+  printf(" *  HangmanGame *\n");
+  printf(" ****************\n\n");
+}
 
-    do
-    {
-        for(int i=0; i < strlen(secretWord); i++)
-        {
-            isFoundWord = 0;
+void letterKick() {
+  char letter;
+  printf("\n");
+  printf("Type a letter: ");
+  scanf(" %c", &letter);
 
-            for(int j=0; j < attempts; j++){
-                if(kicks[j] == secretWord[i])
-                {
-                    isFoundWord = 1;
-                    break;
-                }
-            }
+  kicks[attempts] = letter;
+}
 
-            if(isFoundWord)
-            {
-                printf("%c ", secretWord[i]);
-            }
-            else
-            {
-                printf("_ ");
-            }
-        }
+int scanningKicks(char letter) {
+  short isFoundWord = 0;
 
-        printf("\n");
-        printf("Type a letter: ");
-        scanf(" %c", &letter);
+    for (int j = 0; j < attempts; j++) {
+      if (kicks[j] == letter) {
+        isFoundWord = 1;
+        break;
+      }
+    }
+  
+    return isFoundWord;
+}
 
-        kicks[attempts] = letter;
-        attempts++;
+void drawGame() {
+  printf("You are in attempt: %d\n ", attempts);
 
-    } while(!isCorrect && !isHanged);
-    
-    return 0;
+  for (int i = 0; i < strlen(secretWord); i++) {
+    if (scanningKicks(secretWord[i])) {
+      printf("%c ", secretWord[i]);
+    } else {
+      printf("_ ");
+    }
+  }
+  printf("\n");
+}
+
+void selectWord() {
+  sprintf(secretWord, "MELANCIA");
+}
+
+int main() {
+  short isCorrect = 0;
+  short isHanged = 0;
+
+  opening();
+  selectWord();
+
+  do {
+    drawGame();
+    letterKick();
+    attempts++;
+  } while (!isCorrect && !isHanged);
 }
